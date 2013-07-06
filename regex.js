@@ -5,6 +5,10 @@
 // boring imports:
 var _ = require('underscore');
 
+var allAcceptableSymbols = "abcdefghijklmnopqrstuvwxyz" + 
+                           "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                           "0123456789";
+
 // Operators prioritized from weakest to strongest:
 //  alteration: | - binary operator
 //  concatenation: no special character, concat - binary operator
