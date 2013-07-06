@@ -10,10 +10,10 @@ only. Don't rely on this implementations in any context.
 What actually happened
 ----------------------
 
-I watch the introduction to Automaton theory on Coursera and got curious. After
-reading [this article](http://swtch.com/~rsc/regexp/) I decided to implement a
-regex matcher on my own. Because it is fun to implement such things, don't you
-think so?
+I watched the introduction to Automaton theory course on Coursera and got
+curious.  After reading [this article](http://swtch.com/~rsc/regexp/) I decided
+to implement a regex matcher on my own. Because it is fun to implement such
+things, don't you think so?
 
 I took a slightly different approach of converting regex to NFA compared to the
 one in the article. Hoped I would finish it in one sit but stopped in the middle
