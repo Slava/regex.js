@@ -146,6 +146,9 @@ var regexToNFA = function (regexString) {
       isConcatinating = true;
     } else {
       operator = char;
+
+      // Next operator won't be concatenation in any case.
+      isConcatinating = false;
     }
 
     if (operator && operator !== ")") {
