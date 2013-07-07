@@ -119,7 +119,7 @@ var regexToNFA = function (regexString) {
   };
 
   var performAllStrongerOperations = function (newOperator) {
-    var comparablePriority = operatorPriorities[newOperator] || -1;
+    var comparablePriority = newOperator ? operatorPriorities[newOperator] : -1;
     while (operationsStack.length > 0 && 
            operatorPriorities[_.last(operationsStack)] > comparablePriority)
       performOperatorOnTop();
