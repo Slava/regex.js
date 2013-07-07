@@ -223,6 +223,20 @@ var isNFAMatchingString = function (NFA, input) {
   return _.any(currentStatesSet, function (state) { return state.isFinal; });
 };
 
+
+// Exports //
+// Make this module act like a class
+module.exports = function (regexString) {
+  this.NFA = regexToNFA(regexString);
+};
+
+_.extend(module.exports.prototype, {
+  match: function (input) {
+    return isNFAMatchingString(this.NFA, input);
+  }
+});
+
+// Data model  //
 // Helper function
 // Generates 8 groups of 4 lower case letters separated with dashes
 function _random_id () {
