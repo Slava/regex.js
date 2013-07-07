@@ -65,7 +65,7 @@ var regexToNFA = function (regexString) {
         // entrance state has epsilon moves to entrance states of two fragments
         // and exit state is epsilon reachable from their exit states.
 
-        newFragment = new fragment(new State, new State);
+        newFragment = new Fragment(new State, new State);
 
         newFragment.inState.addTransitions("", [fragmentA.inState, fragmentB.inState]);
 
