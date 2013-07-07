@@ -174,6 +174,68 @@ var regexToNFA = function (regexString) {
   return fragmentsStack[0].inState;
 };
 
+// Returns all epsilon-reachable states from starting set of states.
+// Result includes passed states as well.
+// startingSet - Array
+var epsilonReachableStates = function (startingSet) {
+  var reachableStates = [];
+
+  // Internal implementation is just a dfs
+  var visited = {};
+  var dfs = function (state) {
+    if (visited[state.id])
+      return;
+    visited[state.id] = true;
+    reachableStates.push(state);
+    _.each(state.getTransitions(""), dfs);
+  };
+
+  _.each(startingSet, dfs);
+  return reachableStates;
+};
+
+// Determines whether given NFA accepts given string
+var isNFAMatchingString = function (NFA, input) {
+  // Start from the entrance state
+  var currentStatesSet = [ NFA.inState ];
+  // Keep the rule: on every iteration `currentStatesSet` contains all states
+  // reachable with epsilon moves.
+  currentStatesSet = epsilonReachableStates(currentStatesSet);
+
+  _.each(input, function (char) {
+    var newStatesSet = [];
+    var newStatesIds = {};
+
+    var addToNewStates = function (state) {
+      if (!newStatesIds[state.id]) {
+        newStatesIds[state.id] = true;
+        newStatesSet.append(state);
+      }
+    };
+
+    _.each(currentStatesSet, function (state) {
+      _.each(state.getTransitions(char), addToNewStates);
+    });
+
+    currentStatesSet = epsilonReachableStates(newStatesSet);
+  });
+
+  return _.any(currentStatesSet, function (state) { return state.isFinal; });
+};
+
+// Helper function
+// Generates 8 groups of 4 lower case letters separated with dashes
+function _random_id () {
+  var id = "";
+  for (var i = 0; i < 8; i++) {
+    if (i) id += "-";
+    for (var j = 0; j < 4; j++)
+      id += String.fromCharCode(97 + Math.random() * 26); // lower case letter
+  }
+
+  return id;
+}
+
 // Represents a single state. Each acceptable character maps to an array of
 // corresponding states. They are stored in `transitions` object. `isFinal` is a
 // boolean mark indicating whereas state is an accepting state.
