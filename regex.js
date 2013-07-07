@@ -181,6 +181,7 @@ var regexToNFA = function (regexString) {
 function State (isFinal) {
   this.transitions = {};
   this.isFinal = !!isFinal; // default: false
+  this.id = _random_id();   // just to make it easier to track different states
 }
 
 _.extend(State.prototype, {
