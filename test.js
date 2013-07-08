@@ -79,3 +79,21 @@ suite('Optional char - ?', function () {
   });
 });
 
+suite('One or more operator - + (plus)', function () {
+  test('Use plus!', function () {
+    var r = new Regex('Ja+ck');
+    assert(r.match('Jack'));
+    assert(r.match('Jaack'));
+    assert(r.match('Jaaack'));
+    assert(!r.match('Jck'));
+  });
+
+  test('Plus on group works', function () {
+    var r = new Regex('Na(Na)+Batman');
+    assert(r.match('NaNaBatman'));
+    assert(r.match('NaNaNaBatman'));
+    assert(r.match('NaNaNaNaBatman'));
+    assert(!r.match('NaBatman'));
+  });
+});
+
