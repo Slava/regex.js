@@ -134,7 +134,7 @@ var regexToNFA = function (regexString) {
     var operator = null;
 
     // If char is not an operator, convert it to fragment.
-    if (!_.contains("|*?+()", char)) {
+    if (_.contains(allAcceptableSymbols, char)) {
       fragment = charToFragment(char);
       // If we are concatenating now, resolve all stronger operators on the top
       // of the operators stack and push concatenation operator and fragment to
@@ -144,11 +144,13 @@ var regexToNFA = function (regexString) {
 
       // If next character will be non-operator, it would be concatenation.
       isConcatinating = true;
-    } else {
+    } else if (_.contains("|*?+()", char)) {
       operator = char;
 
       // Next operator won't be concatenation in any case.
       isConcatinating = false;
+    } else {
+      throw new Error("Unexpected symbol '" + char + "'");
     }
 
     if (operator && operator !== ")") {
