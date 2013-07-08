@@ -1,7 +1,36 @@
+var assert = require('assert');
+var _ = require('underscore');
+
 var Regex = require('./regex.js');
-var r = new Regex('asdf|fads');
-console.log(r.match('asdf') ? 'OK' : 'WA');
-console.log(r.match('fads') ? 'OK' : 'WA');
-console.log(!r.match('asd') ? 'OK' : 'WA');
-console.log(!r.match('asdfg') ? 'OK' : 'WA');
+
+suite('String matching', function () {
+  var r = new Regex('magicalstring');
+  test('String matches', function () {
+    assert(r.match('magicalstring'));
+  });
+  test('Prefix matches but not whole string', function () {
+    assert(!r.match('magic'));
+  });
+  test('Suffix matches but not whole string', function () {
+    assert(!r.match('string'));
+  });
+  test('No match', function () {
+    assert(!r.match('wrongstring'));
+  });
+});
+
+suite('Alternation tests', function () {
+  var r = new Regex('first|second|third|fi');
+  test('Match one of alternations: ', function () {
+    _.each(['first', 'second', 'third', 'fi'], function (string) {
+      assert(r.match(string));
+    });
+  });
+
+  test('No match for substring of one', function () {
+    assert(!r.match('fir'));
+    assert(!r.match('firs'));
+    assert(!r.match('irs'));
+  });
+});
 
