@@ -135,7 +135,7 @@ var regexToNFA = function (regexString) {
     var operator = null;
 
     // If char is not an operator, convert it to fragment.
-    if (_.contains(allAcceptableSymbols, char)) {
+    if (_.contains(allAcceptableSymbols, char) || char === '.') {
       fragment = charToFragment(char);
       // If we are concatenating now, resolve all stronger operators on the top
       // of the operators stack and push concatenation operator and fragment to
