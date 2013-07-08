@@ -113,5 +113,13 @@ suite('One or more operator - + (plus)', function () {
     assert(r.match('NaNaNaNaBatman'));
     assert(!r.match('NaBatman'));
   });
+
+  test('Regex meaning nonempty string', function () {
+    var r = new Regex('.+');
+    assert(r.match('abracadabra'));
+    assert(r.match('diehard'));
+    assert(r.match('50shadesOfGrey'));
+    assert(!r.match(''));
+  });
 });
 
