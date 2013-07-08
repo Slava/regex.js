@@ -199,8 +199,8 @@ var epsilonReachableStates = function (startingSet) {
 
 // Determines whether given NFA accepts given string
 var isNFAMatchingString = function (NFA, input) {
-  // Start from the entrance state
-  var currentStatesSet = [ NFA.inState ];
+  // Since NFA is a state reference, it will be initial state
+  var currentStatesSet = [ NFA ];
   // Keep the rule: on every iteration `currentStatesSet` contains all states
   // reachable with epsilon moves.
   currentStatesSet = epsilonReachableStates(currentStatesSet);
@@ -212,7 +212,7 @@ var isNFAMatchingString = function (NFA, input) {
     var addToNewStates = function (state) {
       if (!newStatesIds[state.id]) {
         newStatesIds[state.id] = true;
-        newStatesSet.append(state);
+        newStatesSet.push(state);
       }
     };
 
