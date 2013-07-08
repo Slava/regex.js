@@ -26,8 +26,10 @@ var operatorPriorities = {
 // char - String
 var charToFragment = function (char) {
   var fragment = new Fragment(new State, new State);
-  fragment.inState.addTransitions(char === "." ? allAcceptableSymbols : char, 
-                                  fragment.outState);
+  _.each(char === "." ? allAcceptableSymbols : [char], function (char) {
+    fragment.inState.addTransitions(char, fragment.outState);
+  });
+
   return fragment;
 };
 
