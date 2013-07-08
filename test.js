@@ -59,9 +59,23 @@ suite('Optional char - ?', function () {
   test('Not using this char matches', function () {
     assert(r.match('At'));
   });
-  test('More chars at this place doesn\'t match', function () {
+  test('More or wrong chars at this place doesn\'t match', function () {
+    assert(!r.match('Abt'));
     assert(!r.match('Annt'));
     assert(!r.match('Anttt'));
+  });
+
+  test('Optional any character .?', function () {
+    var r = new Regex('x.?z');
+    assert(r.match('xyz'));
+    assert(r.match('xz'));
+  });
+
+  test('Optional works on groups', function () {
+    var r = new Regex('(pre)?fix');
+    assert(r.match('prefix'));
+    assert(r.match('fix'));
+    assert(!r.match('suffix'));
   });
 });
 
