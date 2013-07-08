@@ -150,8 +150,8 @@ var regexToNFA = function (regexString) {
     } else if (_.contains("|*?+()", char)) {
       operator = char;
 
-      // Next operator won't be concatenation in any case.
-      isConcatinating = false;
+      // only some operators will not allow to concatinate with symbols after them
+      isConcatinating = operator !== "|" && operator !== "(";
     } else {
       throw new Error("Unexpected symbol '" + char + "'");
     }
