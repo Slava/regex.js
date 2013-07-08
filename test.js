@@ -19,6 +19,24 @@ suite('String matching', function () {
   });
 });
 
+suite('Grouping', function () {
+  test('Just grouping shouldn\'t affect anything', function () {
+    var r = new Regex('(somestring)');
+    assert(r.match('somestring'));
+  });
+
+  test('Just grouping around concatenated groups', function () {
+    var r = new Regex('((some)|(any))thing');
+    assert(r.match('something'));
+    assert(r.match('anything'));
+  });
+
+  test('Nest grouping', function () {
+    var r = new Regex('(((((yahoo)))))');
+    assert(r.match('yahoo'));
+  });
+});
+
 suite('Alternation tests', function () {
   var r = new Regex('first|second|third|fi');
   test('Match one of alternations: ', function () {
