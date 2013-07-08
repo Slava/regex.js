@@ -34,3 +34,12 @@ suite('Alternation tests', function () {
   });
 });
 
+suite('Match any character - dot', function () {
+  var r = new Regex('ItIs....');
+  test('Match of different variations', function () {
+    assert(r.match('ItIsGood'));
+    assert(r.match('ItIsBadd'));
+    assert(r.match('ItIsxxxx'));
+  });
+});
+
