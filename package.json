@@ -1,0 +1,12 @@
+{
+  "name": "regex.js",
+  "version": "0.0.1",
+  "description": "Simple regular expressions matcher",
+  "author": "Slava Kim <imslavko@gmail.com>",
+  "dependencies": {
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  }
+}
