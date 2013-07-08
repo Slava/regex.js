@@ -157,6 +157,7 @@ var regexToNFA = function (regexString) {
     }
 
     if (operator && operator !== ")") {
+      if (operator !== "(")
       performAllStrongerOperations(operator);
       operationsStack.push(operator);
     }
