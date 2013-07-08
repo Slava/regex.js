@@ -34,7 +34,7 @@ suite('Alternation tests', function () {
   });
 });
 
-suite('Match any character - dot', function () {
+suite('Match any character - . (dot)', function () {
   var r = new Regex('ItIs....');
   test('Match of different variations', function () {
     assert(r.match('ItIsGood'));
@@ -47,6 +47,21 @@ suite('Match any character - dot', function () {
     assert(!r.match('itIsGood'));
     assert(!r.match('ItIsGoodx'));
     assert(!r.match('ItIsGoo'));
+  });
+});
+
+suite('Optional char - ?', function () {
+  var r = new Regex('An?t');
+
+  test('Using this char matches', function () {
+    assert(r.match('Ant'));
+  });
+  test('Not using this char matches', function () {
+    assert(r.match('At'));
+  });
+  test('More chars at this place doesn\'t match', function () {
+    assert(!r.match('Annt'));
+    assert(!r.match('Anttt'));
   });
 });
 
