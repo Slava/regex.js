@@ -40,6 +40,13 @@ suite('Match any character - dot', function () {
     assert(r.match('ItIsGood'));
     assert(r.match('ItIsBadd'));
     assert(r.match('ItIsxxxx'));
+    assert(r.match('ItIs12O4'));
+  });
+
+  test('No match with wrong strings', function () {
+    assert(!r.match('itIsGood'));
+    assert(!r.match('ItIsGoodx'));
+    assert(!r.match('ItIsGoo'));
   });
 });
 
