@@ -82,6 +82,7 @@ var regexToNFA = function (regexString) {
         // To concatenate two fragments just connect exit state of the first
         // fragment with entrance state of the second one.
         fragmentA.outState.addTransitions("", fragmentB.inState);
+        fragmentA.outState = fragmentB.outState;
 
         fragmentsStack.push(fragmentA);
         break;
