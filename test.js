@@ -123,3 +123,19 @@ suite('One or more operator - + (plus)', function () {
   });
 });
 
+suite('Kleane star operator - 0 or more repetitions', function () {
+  test('Basic checks that * works', function () {
+    var r = new Regex('prefix(abra)*suffix0*');
+    assert(r.match('prefixsuffix'));
+    assert(r.match('prefixsuffix0'));
+    assert(r.match('prefixsuffix0000'));
+    assert(r.match('prefixabrasuffix0000'));
+    assert(r.match('prefixabraabrasuffix'));
+    assert(!r.match('prefixabrabrasuffix'));
+  });
+  test('Empty string regex', function () {
+    var r = new Regex('*');
+    assert(r.match(''));
+  });
+});
+
