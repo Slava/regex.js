@@ -31,3 +31,9 @@ This matcher should support basic operators:
 - "?" - zero or one occurrence
 - "(", ")" - set priorities of operators
 
+Testing
+-------
+
+There is a script that runs moca tests. After simple tests pass one should add
+a giant test suite from the Internets.
+
