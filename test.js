@@ -134,7 +134,7 @@ suite('Kleane star operator - 0 or more repetitions', function () {
     assert(!r.match('prefixabrabrasuffix'));
   });
   test('Empty string regex', function () {
-    var r = new Regex('*');
+    var r = new Regex('.*');
     assert(r.match(''));
   });
 });
