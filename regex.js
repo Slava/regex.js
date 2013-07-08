@@ -150,6 +150,11 @@ var regexToNFA = function (regexString) {
     } else if (_.contains("|*?+()", char)) {
       operator = char;
 
+      // Special case, when there is a new group, it could be concatenated in
+      // the end with previous group/char.
+      if (isConcatinating && operator === "(")
+        operationsStack.push("concat");
+
       // only some operators will not allow to concatinate with symbols after them
       isConcatinating = operator !== "|" && operator !== "(";
     } else {
@@ -158,7 +163,7 @@ var regexToNFA = function (regexString) {
 
     if (operator && operator !== ")") {
       if (operator !== "(")
-      performAllStrongerOperations(operator);
+        performAllStrongerOperations(operator);
       operationsStack.push(operator);
     }
 
